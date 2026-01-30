@@ -1,7 +1,9 @@
 
 import { useEffect, useState } from 'react'
 import Product from '../components/Product'
-import axios from 'axios';
+import '../assets/css/productpage.css';
+import { getProducts } from '../api/product.api';
+import { useNavigate } from 'react-router-dom';
 
 interface Product{
     id : number,
@@ -13,36 +15,66 @@ const ProductPage = () => {
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState<Product[]>([]);
 
-    useEffect(() => {
-        const getProducts = async () => {
-            try{
-                const response = await axios.get('http://localhost:3000/products');
-                console.log("Products: "+response.data);
-                setProducts(response.data.data);
-                setLoading(false);
-            }
-            catch(error){
-                console.log(error);
-            }
-        }
-        getProducts();
-  },[]);
+    const navigate = useNavigate();
 
-    return (
+    useEffect(() => {
+        const fetchData = async () => {
+        try {
+            const data = await getProducts();
+            setProducts(data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+        };
+        fetchData();
+    },[]);
+
+    const deleteProduct = async (id : number) => {
+        try{
+            if (!window.confirm('Are you sure?')) return;
+            await deleteProduct(id);
+            setProducts(products.filter((product) => product.id !== id));
+        }catch(error){
+            console.error(error);
+        }
+    };
+
+    return(
         <>
-        <h2>Product List</h2>
-        <div className="error">{loading ? "Loading..." : ""}</div>
-        <div>
-            {products.map((product) => (
-                <Product key={product.id} 
-                id={product.id}
-                name={product.name}
-                total_quantity={product.total_quantity}
-                />
-            ))}
+        <div className="table-container">
+           <div className="navbar">
+             <h2>Product List</h2>
+            <button onClick={() => navigate('/add')}>Add Product</button>
+           </div>
+                <table className="product-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {products.map((product) => (
+                        <tr key={product.id}>
+                        <td>{product.id}</td>
+                        <td>{product.name}</td>
+                        <td>{product.total_quantity}</td>
+                        <td>
+                            <button>Edit</button>
+                            <button onClick={() => deleteProduct(product.id)}>Delete</button>
+                            <button>View</button>
+                        </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
         </div>
         </>
-    )
+    );
 }
 
-export default ProductPage
+export default ProductPage;
