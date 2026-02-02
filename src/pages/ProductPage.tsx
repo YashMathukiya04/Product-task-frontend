@@ -47,9 +47,10 @@ const ProductPage = () => {
              <h2>Product List</h2>
              <div className="menus">
                 <button onClick={() => navigate('/add')}>Add Product</button>
-                <button onClick={() => navigate('/')}>Add Stock</button>
+                <button onClick={() => navigate('/stock')}>View Stock</button>
              </div>
            </div>
+           
                 <table className="product-table">
                     <thead>
                         <tr>
@@ -68,7 +69,6 @@ const ProductPage = () => {
                         <td>
                             <button onClick={() => navigate('/edit/' + product.id)}>Edit</button>
                             <button onClick={() => deleteProduct(product.id)}>Delete</button>
-                            <button>View</button>
                         </td>
                         </tr>
                     ))}
