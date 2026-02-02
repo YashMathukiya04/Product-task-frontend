@@ -8,6 +8,7 @@ const AddProduct = () => {
 
   const [product, setProduct] = useState({
     name: '',
+    total_quantity: 0,
   });
 
   const handleSubmit = async(event : React.FormEvent<HTMLFormElement>) => {
@@ -15,11 +16,13 @@ const AddProduct = () => {
     
     try{
       await addProduct({
-        name: product.name
+        name: product.name,
+        total_quantity: product.total_quantity,
       });
 
       setProduct({
         name: '',
+        total_quantity: 0,
       });
       navigate('/');
     }catch(error){
@@ -37,11 +40,26 @@ const AddProduct = () => {
  
   return (
     <div>
+      <center>
         <form onSubmit={handleSubmit}>
-            <input type="text" placeholder='Product Name' value={product.name} name='name' onChange={handleChange} />
-            {/* <input type="number" placeholder='Quantity' value={product.total_quantity} name='total_quantity' onChange={handleChange} /> */}
-            <button type='submit'>Add Product</button>
+            <h1>Add Product</h1>
+          <table border={1}>
+            <tbody>
+              <tr>
+                <td>Product Name</td>
+                <td><input type="text" placeholder='Product Name' value={product.name} name='name' onChange={handleChange} /></td>
+              </tr>
+              <tr>
+                <td>Quantity</td>
+                <td><input type="number" placeholder='Quantity' value={product.total_quantity} name='total_quantity' onChange={handleChange} /></td>
+              </tr>
+              <tr>
+                <td colSpan={2} align='center'><button type='submit'>Add Product</button></td>
+              </tr>
+            </tbody>
+          </table>
         </form>
+      </center>
     </div>
   )
 }

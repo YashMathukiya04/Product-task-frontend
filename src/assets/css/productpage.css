@@ -3,6 +3,18 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.menus{
+    display: flex;
+    gap: 15px;
+}
+
 .product-table {
     width: 100%;
     border-collapse: collapse;

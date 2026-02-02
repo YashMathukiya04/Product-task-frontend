@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import Product from '../components/Product'
 import '../assets/css/productpage.css';
-import { getProducts } from '../api/product.api';
+import { getProducts, deleteProductbyId } from '../api/product.api';
 import { useNavigate } from 'react-router-dom';
 
 interface Product{
@@ -33,8 +33,7 @@ const ProductPage = () => {
 
     const deleteProduct = async (id : number) => {
         try{
-            if (!window.confirm('Are you sure?')) return;
-            await deleteProduct(id);
+            await deleteProductbyId(id);
             setProducts(products.filter((product) => product.id !== id));
         }catch(error){
             console.error(error);
@@ -46,7 +45,10 @@ const ProductPage = () => {
         <div className="table-container">
            <div className="navbar">
              <h2>Product List</h2>
-            <button onClick={() => navigate('/add')}>Add Product</button>
+             <div className="menus">
+                <button onClick={() => navigate('/add')}>Add Product</button>
+                <button onClick={() => navigate('/')}>Add Stock</button>
+             </div>
            </div>
                 <table className="product-table">
                     <thead>
@@ -64,7 +66,7 @@ const ProductPage = () => {
                         <td>{product.name}</td>
                         <td>{product.total_quantity}</td>
                         <td>
-                            <button>Edit</button>
+                            <button onClick={() => navigate('/edit/' + product.id)}>Edit</button>
                             <button onClick={() => deleteProduct(product.id)}>Delete</button>
                             <button>View</button>
                         </td>

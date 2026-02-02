@@ -1,12 +1,8 @@
-import React from 'react'
 
 interface ProductProps{
     id: number;
     name: string;
     total_quantity: number;
-    // created_at: string | Date;
-    // updated_at: string | Date;
-    // stocks?: any[];
 }
 
 const Product = (props:ProductProps) => {
