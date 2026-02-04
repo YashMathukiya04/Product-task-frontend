@@ -14,3 +14,8 @@ export const addStock = async (stock: {
     const response = await api.post('/stocks', stock);
     return response.data;
 }
+
+export const getStockEntries = async() => {
+  const response = await api.get('/stocks/entries/');
+  return response.data.data;
+}
