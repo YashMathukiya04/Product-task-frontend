@@ -18,6 +18,7 @@ const AppRoutes = () => {
                 <Route path="view/:id" element={<StockDetails />} />
             </Route>
             <Route path="/stock/add" element={<AddStock />} />
+            <Route path="/stock/add/:productId" element={<AddStock />} />
         </Routes>
     )
 }

@@ -67,6 +67,7 @@ const ViewProduct = () => {
                             <td>Batch No.</td>
                             <td>Quantity</td>
                             <td>Expiry Date</td>
+                            <td>Add Stock</td>
                         </tr>
                     </thead>
                     <tbody> 
@@ -76,6 +77,7 @@ const ViewProduct = () => {
                                 <td>{stock.batch_number}</td>
                                 <td>{stock.quantity}</td>
                                 <td>{stock.expiry_date}</td>
+                                <td><button onClick={() => navigate(`/stock/add/${product.id}`)}>Add Stock</button></td>
                             </tr>
                         ))}
                     </tbody>

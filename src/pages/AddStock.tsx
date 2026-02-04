@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { addStock } from "../api/stock.api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AddStock = () => {
 
     const navigate = useNavigate();
+    const {productId} = useParams<{productId?: string}>();
     const [stock, setStock] = useState({
-        product_id: 0,
+        product_id: Number(productId),
         batch_number: '',
         quantity: 0,
         expiry_date: '',
@@ -24,8 +25,7 @@ const AddStock = () => {
         event.preventDefault();
        
         try{
-
-              const payload = {
+            const payload = {
                 product_id: Number(stock.product_id), 
                 batch_number: stock.batch_number,
                 quantity: Number(stock.quantity), 
@@ -33,7 +33,7 @@ const AddStock = () => {
             };
             await addStock(payload);
             setStock({
-                product_id: 0,
+                product_id: Number(productId) || 0,
                 batch_number: '',
                 quantity: 0,
                 expiry_date: '',
@@ -52,7 +52,7 @@ const AddStock = () => {
                     <tbody>
                         <tr>
                             <td>Product ID</td>
-                            <td><input type="text" name="product_id" placeholder="Product ID" value={stock.product_id} onChange={handleChange} /></td>
+                            <td><input type="text" name="product_id" placeholder="Product ID" value={isNaN(stock.product_id) ? 0 : stock.product_id} onChange={handleChange} /></td>
                         </tr>
                         <tr>
                             <td>Batch Number</td>
