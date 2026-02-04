@@ -4,15 +4,17 @@ import { useNavigate } from "react-router-dom";
 
 interface Stock {
     id : number,
+    product_id : number,
     batch_number : string,
     quantity : number,
+    expiry_date : string,
     product : {
         name: string;
         total_quantity: number;
     },
 }
 
-const StockPage : React.FC<Stock> = () => {
+const StockPage = () => {
 
     const [loading, setLoading] = useState(true);
     const [stock, setStock] = useState<Stock[]>([]);
@@ -39,15 +41,16 @@ const StockPage : React.FC<Stock> = () => {
                 <h2>Stock List</h2>
                 <div className="menus">
                     <button onClick={() => navigate('/stock/add')}>Add Stock</button>
-
                 </div>
             </div>
             <table>
                 <thead>
                     <tr>
                         <th>Stock ID</th>
+                        <th>Product ID</th>
                         <th>Batch No.</th>
                         <th>Quantity</th>
+                        <th>Expiry Date</th>
                         <th>View</th>
                     </tr>
                 </thead>
@@ -55,10 +58,12 @@ const StockPage : React.FC<Stock> = () => {
                     {stock.map((stock) => (
                         <tr key={stock.id}>
                             <td>{stock.id}</td>
+                            <td>{stock.product_id}</td>
                             <td>{stock.batch_number}</td>
                             <td>{stock.quantity}</td>
+                            <td>{stock.expiry_date}</td>
                             <td>
-                                <button onClick={() => navigate('/stock/')}>View</button>
+                                <button onClick={() => navigate(`/stock/view/${stock.id}`)}>View</button>
                             </td>
                         </tr>
                     ))}
@@ -70,3 +75,4 @@ const StockPage : React.FC<Stock> = () => {
 };
 
 export default StockPage;
+

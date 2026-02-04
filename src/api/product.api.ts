@@ -5,6 +5,11 @@ export const getProducts = async () => {
     return response.data.data;
 }
 
+export const getProductById = async (id : number) => {
+    const response = await api.get('/products/' + id);
+    return response.data.data;
+}
+
 export const deleteProductbyId = async (id : number) => {
     const response = await api.delete('/products/' + id);
     return response.data;

@@ -66,9 +66,10 @@ const ProductPage = () => {
                         <td>{product.id}</td>
                         <td>{product.name}</td>
                         <td>{product.total_quantity}</td>
-                        <td>
+                        <td className='action-buttons'>
                             <button onClick={() => navigate('/edit/' + product.id)}>Edit</button>
                             <button onClick={() => deleteProduct(product.id)}>Delete</button>
+                            <button onClick={() => navigate('/product/' + product.id)}>View</button>
                         </td>
                         </tr>
                     ))}
