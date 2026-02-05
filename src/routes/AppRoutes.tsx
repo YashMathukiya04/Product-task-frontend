@@ -6,6 +6,7 @@ import StockPage from "../components/Stock";
 import AddStock from "../pages/AddStock";
 import StockDetails from "../components/StockDetails";
 import ViewProduct from "../components/ViewProduct";
+import AddCart from "../components/AddCart";
 
 const AppRoutes = () => {
     return (
@@ -19,6 +20,7 @@ const AppRoutes = () => {
             </Route>
             <Route path="/stock/add" element={<AddStock />} />
             <Route path="/stock/add/:productId" element={<AddStock />} />
+            <Route path="/cart/add" element={<AddCart />} />
         </Routes>
     )
 }

@@ -70,6 +70,11 @@ const ProductPage = () => {
                             <button onClick={() => navigate('/edit/' + product.id)}>Edit</button>
                             <button onClick={() => deleteProduct(product.id)}>Delete</button>
                             <button onClick={() => navigate('/product/' + product.id)}>View</button>
+                            <button onClick={() => navigate('/cart/add', { state: {
+                                 product_id: product.id, 
+                                 product_name: product.name 
+                                 } 
+                            })}>Add to Cart</button>
                         </td>
                         </tr>
                     ))}
