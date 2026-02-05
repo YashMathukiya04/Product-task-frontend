@@ -19,3 +19,13 @@ export const getStockEntries = async() => {
   const response = await api.get('/stocks/entries/');
   return response.data.data;
 }
+
+export const addBulk = async(stock :{
+  product_id: number;
+  batch_number: string;
+  quantity: number;
+  expiry_date: string;
+}[]) => {
+    const response = await api.post('/stocks/bulk', stock);
+    return response.data;
+}

@@ -14,6 +14,7 @@ interface Product{
 const ProductPage = () => {
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState<Product[]>([]);
+    const [selectedproduct, setSelectedproduct] = useState<Product[]>([]);
 
     const navigate = useNavigate();
 
@@ -30,6 +31,14 @@ const ProductPage = () => {
         };
         fetchData();
     },[]);
+
+    const handleAddToCart = (product : Product, checked : boolean) => {
+        if(checked){
+            setSelectedproduct(prev => [...prev, product]);
+        }else{
+            setSelectedproduct(prev => prev.filter(p => p.id !== product.id));
+        }
+    }
 
     const deleteProduct = async (id : number) => {
         try{
@@ -48,9 +57,9 @@ const ProductPage = () => {
              <div className="menus">
                 <button onClick={() => navigate('/add')}>Add Product</button>
                 <button onClick={() => navigate('/stock')}>View Stock</button>
+                <button onClick={() => navigate('/cart/add',{state : selectedproduct})}>Add to Cart</button>
              </div>
            </div>
-           
                 <table className="product-table">
                     <thead>
                         <tr>
@@ -70,11 +79,12 @@ const ProductPage = () => {
                             <button onClick={() => navigate('/edit/' + product.id)}>Edit</button>
                             <button onClick={() => deleteProduct(product.id)}>Delete</button>
                             <button onClick={() => navigate('/product/' + product.id)}>View</button>
-                            <button onClick={() => navigate('/cart/add', { state: {
+                            {/* <button onClick={() => navigate('/cart/add', { state: {
                                  product_id: product.id, 
                                  product_name: product.name 
                                  } 
-                            })}>Add to Cart</button>
+                            })}>Add to Cart</button> */}
+                            <input type="checkbox" name="addtocart" id="addtocart" onChange={(e) => handleAddToCart(product, e.target.checked)} />
                         </td>
                         </tr>
                     ))}
