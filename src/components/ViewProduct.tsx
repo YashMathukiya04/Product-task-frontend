@@ -41,6 +41,7 @@ const ViewProduct = () => {
         fetchProduct();
    },[id]);
 
+   
 
     return (
         <>

@@ -57,7 +57,15 @@ const ProductPage = () => {
              <div className="menus">
                 <button onClick={() => navigate('/add')}>Add Product</button>
                 <button onClick={() => navigate('/stock')}>View Stock</button>
-                <button onClick={() => navigate('/cart/add',{state : selectedproduct})}>Add to Cart</button>
+                <button onClick={() => {
+                    if(selectedproduct.length === 0){
+                        alert("Please select at least one product");
+                        return;
+                    }
+                    navigate('/cart/add', {state : selectedproduct})
+                }}>
+                    Add to Cart
+                </button>
              </div>
            </div>
                 <table className="product-table">
@@ -79,12 +87,10 @@ const ProductPage = () => {
                             <button onClick={() => navigate('/edit/' + product.id)}>Edit</button>
                             <button onClick={() => deleteProduct(product.id)}>Delete</button>
                             <button onClick={() => navigate('/product/' + product.id)}>View</button>
-                            {/* <button onClick={() => navigate('/cart/add', { state: {
-                                 product_id: product.id, 
-                                 product_name: product.name 
-                                 } 
-                            })}>Add to Cart</button> */}
-                            <input type="checkbox" name="addtocart" id="addtocart" onChange={(e) => handleAddToCart(product, e.target.checked)} />
+                            <input type="checkbox" name="addtocart" 
+                                id="addtocart"
+                                onChange={(e) => 
+                                handleAddToCart(product, e.target.checked)} />
                         </td>
                         </tr>
                     ))}

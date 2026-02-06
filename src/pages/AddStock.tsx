@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { addStock } from "../api/stock.api";
 import { useNavigate, useParams } from "react-router-dom";
+import '../assets/css/addstock.css';
 
 const AddStock = () => {
 
