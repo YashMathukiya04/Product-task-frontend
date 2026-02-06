@@ -2,6 +2,7 @@ import type React from "react"
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { updateProductById } from "../api/product.api";
+import '../assets/css/addProduct.css';
 
 const EditProduct = () => {
 
@@ -30,7 +31,7 @@ const EditProduct = () => {
     <>
         <h2>Edit Product</h2>
         <form onSubmit={handleUpdate}>
-            <table>
+            <table className="product-table">
                 <tbody>
                 <tr>
                     <td>Product Name</td>
@@ -43,6 +44,11 @@ const EditProduct = () => {
                 <tr>
                     <td colSpan={2}>
                         <button type='submit'>Update</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colSpan={2} >
+                        <button  onClick={() => navigate("/")}>Back</button>
                     </td>
                 </tr>
                 </tbody>

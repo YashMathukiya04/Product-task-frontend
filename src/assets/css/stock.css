@@ -2,7 +2,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.table-container {
+.stock-container {
     /* max-width: 700px; */
     width: 100%;
     border-collapse: collapse;
@@ -29,13 +29,13 @@
     background-color: #f2f2f2;
 }
 
-.product-table {
+.stock-table {
     border: 1px solid #d8d6ff;
     border-radius: 8px;
     width: 100%;
 }
 
-.product-table th {
+.stock-table th {
     background-color: #f2f2f2;
     padding: 8px;
     border-radius: 2px;
@@ -43,14 +43,14 @@
     text-align: center;
 }
 
-.product-table td {
+.stock-table td {
     padding: 8px;
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.product-table tr:hover {
+.stock-table tr:hover {
     background-color: #f5f5f5;
 } 
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getProductById } from "../api/product.api";
-
+import '../assets/css/addProduct.css';
 interface Stock {
     id: number;
     product_id: number;
@@ -46,7 +46,7 @@ const ViewProduct = () => {
     return (
         <>
             <center>
-                <table border={1}>
+                <table className="product-table">
                     <thead>
                         <tr>
                             <td>Product Name</td>
@@ -63,7 +63,9 @@ const ViewProduct = () => {
                 <br /><br />
                 <button onClick={() => navigate(`/stock/add/${product.id}`)}>Add Stock</button>
                 <br /><br /><br />
-                <table border={1}>
+                <button onClick={() => navigate('/')}>Back</button>
+                <br /><br />
+                <table className="product-table">
                     <thead>
                         <tr>
                             <td>Stock ID</td>

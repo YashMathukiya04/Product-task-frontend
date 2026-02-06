@@ -41,17 +41,22 @@ const AddProduct = () => {
   return (
     <div>
       <center>
-        <form onSubmit={handleSubmit}>
-            <h1>Add Product</h1>
-          <table border={1}>
+        <div className="navbar">
+          <h2>Add Product</h2>
+          <div className="menus">
+            <button onClick={() => navigate("/")}>Back</button>
+          </div>
+        </div>
+        <form onSubmit={handleSubmit} className='table-container'>
+          <table className='product-table'>
             <tbody>
               <tr>
                 <td>Product Name</td>
-                <td><input type="text" placeholder='Product Name' value={product.name} name='name' onChange={handleChange} /></td>
+                <td><input type="text" placeholder='Product Name' value={product.name} name='name' onChange={handleChange} required/></td>
               </tr>
               <tr>
                 <td>Quantity</td>
-                <td><input type="number" placeholder='Quantity' value={product.total_quantity} name='total_quantity' onChange={handleChange} /></td>
+                <td><input type="number" placeholder='Quantity' value={product.total_quantity} name='total_quantity' onChange={handleChange} required/></td>
               </tr>
               <tr>
                 <td colSpan={2} align='center'><button type='submit'>Add Product</button></td>

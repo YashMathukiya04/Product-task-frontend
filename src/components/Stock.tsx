@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getStocks } from "../api/stock.api";
 import { useNavigate } from "react-router-dom";
+import '../assets/css/stock.css';
 
 interface Stock {
   id: number;
@@ -39,10 +40,11 @@ const StockPage = () => {
         <div className="navbar">
           <h2>Stock List</h2>
           <div className="menus">
-            <button onClick={() => navigate("/stock/add")}>Add Stock</button>
+            {/* <button onClick={() => navigate("/stock/add")}>Add Stock</button> */}
+            <button onClick={() => navigate("/")}>Back</button>
           </div>
         </div>
-        <table>
+        <table className="stock-table">
           <thead>
             <tr>
               <th>Stock ID</th>
