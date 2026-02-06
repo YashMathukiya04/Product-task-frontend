@@ -9,10 +9,15 @@ interface Product {
 }
 
 const AddCart = () => {
-  const location = useLocation();
+  // const location = useLocation();
   const navigate = useNavigate();
+  const selectedproduct = localStorage.getItem('selectedproduct');
 
-  const products = (location.state as Product[]) || undefined;
+  const products: Product[] = selectedproduct
+  ? JSON.parse(selectedproduct)
+  : [];
+
+  // const products = (location.state as Product[]) || undefined;
   // const [quantity, setQuantity] = useState(1);
 
   const [cartItems, setCartItems] = useState(
@@ -43,14 +48,26 @@ const AddCart = () => {
     );
   };
 
+  const isFutureDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const today = new Date();
+    return date > today;
+  }
+
   const handleBulk = async () => {
+
+      if (!isFutureDate(cartItems[cartItems.length - 1].expiry_date)) {
+              window.alert("Expiry date must be a future date");
+            return;
+        }
+
     try {
       const payload = cartItems.map((item) => ({
         product_id: item.product_id,
         product_name: item.product_name,
         quantity: item.quantity,
-        batch_number: item.batch_number || "DEFAULT_BATCH",
-        expiry_date: item.expiry_date || "2026-12-31",
+        batch_number: item.batch_number,
+        expiry_date: item.expiry_date,
       }));
       const response = await addBulk(payload);
       console.log(response);
@@ -86,11 +103,11 @@ const AddCart = () => {
               </td>
               <td>{item.quantity}</td>
               <td>
-                <input type="text" value={item.batch_number} onChange={(e) => setCartItems((prev) => prev.map((p, i) => i === index ? { ...p, batch_number: e.target.value } : p))}
+                <input type="text" required value={item.batch_number} onChange={(e) => setCartItems((prev) => prev.map((p, i) => i === index ? { ...p, batch_number: e.target.value } : p))}
                 />
               </td>
               <td>
-                <input type="date" value={item.expiry_date} onChange={(e) => setCartItems((prev) => prev.map((p, i) => i === index ? { ...p, expiry_date: e.target.value } : p))}
+                <input type="date" required value={item.expiry_date} onChange={(e) => setCartItems((prev) => prev.map((p, i) => i === index ? { ...p, expiry_date: e.target.value } : p))}
                 />
               </td>
             </tr>

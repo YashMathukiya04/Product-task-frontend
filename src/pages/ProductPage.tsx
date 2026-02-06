@@ -62,7 +62,9 @@ const ProductPage = () => {
                         alert("Please select at least one product");
                         return;
                     }
-                    navigate('/cart/add', {state : selectedproduct})
+                    localStorage.setItem('selectedproduct', JSON.stringify(selectedproduct));
+                    navigate('/cart/add');
+                    console.log(selectedproduct);
                 }}>
                     Add to Cart
                 </button>
@@ -84,9 +86,9 @@ const ProductPage = () => {
                         <td>{product.name}</td>
                         <td>{product.total_quantity}</td>
                         <td className='action-buttons'>
-                            <button onClick={() => navigate('/edit/' + product.id)}>Edit</button>
-                            <button onClick={() => deleteProduct(product.id)}>Delete</button>
-                            <button onClick={() => navigate('/product/' + product.id)}>View</button>
+                            <button className='edit-btn' onClick={() => navigate('/edit/' + product.id)}>Edit</button>
+                            <button className='delete-btn' onClick={() => deleteProduct(product.id)}>Delete</button>
+                            <button className='view-btn' onClick={() => navigate('/product/' + product.id)}>View</button>
                             <input type="checkbox" name="addtocart" 
                                 id="addtocart"
                                 onChange={(e) => 
